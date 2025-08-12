@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@plugin 'tailwind-scrollbar';
+
+@theme {
+  --color-primary-bg: #f3f4f6;
+  --color-secondary-bg: #e5e7eb ;
+  --color-highlight-bg: #dbeafe;
+  --color-accent: #0284c7;
+  --color-accent-hover: #0369a1;
+  --color-focus-ring: #38bdf8;
+  --color-text-primary: #111827;
+  --color-text-secondary: #4b5563;
+  --color-border: #d1d5db;
+  --color-error-bg: #fef2f2;
+  --color-error-border: #fca5a5;
+  --color-error-text: #dc2626;
+  --color-success-bg: #f0fdf4;
+  --color-success-text: #16a34a;
+  --color-warning-bg: #fffbeb;
+  --color-warning-text: #a16207;
+}
+
+@theme dark {
+  --color-primary-bg: #0f172a;
+  --color-secondary-bg: #1e293b;
+  --color-highlight-bg: #1e40af;
+  --color-accent: #38bdf8;
+  --color-accent-hover: #0ea5e9;
+  --color-focus-ring: #7dd3fc;
+  --color-text-primary: #f9fafb;
+  --color-text-secondary: #cbd5e1;
+  --color-border: #334155;
+  --color-error-bg: #450a0a;
+  --color-error-border: #991b1b;
+  --color-error-text: #fca5a5;
+  --color-success-bg: #022c22;
+  --color-success-text: #34d399;
+  --color-warning-bg: #422006;
+  --color-warning-text: #fbbf24;
+}
