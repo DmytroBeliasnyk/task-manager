@@ -3,12 +3,15 @@ import clsx from 'clsx/lite';
 import type {List} from "../../../data/lists.ts";
 import {Button} from "../../button/Button.tsx";
 import type {Task} from "../../../data/tasks.ts";
+import {type ListManagementFormMode, ModalFormMode} from "../../../utils/modalFormMode.ts";
 
 type TaskSectionProps = {
   selectedList: List | null
+  openForm: (formState: ListManagementFormMode) => void
 }
 
-export const TasksSection: FC<TaskSectionProps> = ({selectedList}) => {
+export const ListManagementSection: FC<TaskSectionProps> = (
+  {selectedList, openForm}) => {
   const tasksSectionClassName: string = clsx(
     'flex flex-col flex-1 bg-secondary-bg rounded-md',
     !selectedList && 'justify-center items-center text-center',
@@ -31,6 +34,11 @@ export const TasksSection: FC<TaskSectionProps> = ({selectedList}) => {
               .map((task: Task): JSX.Element => (
                 <div
                   key={task.id}
+                  onClick={() => openForm({
+                    formMode: ModalFormMode.EditTask,
+                    formItem: task,
+                    listId: selectedList.id
+                  })}
                   className="flex flex-1 p-2 bg-gray-300 rounded-md hover:border hover:border-gray-400"
                 >
                   <section className="flex flex-col">
@@ -43,7 +51,12 @@ export const TasksSection: FC<TaskSectionProps> = ({selectedList}) => {
           <div className="flex justify-end">
             <Button
               text={"Add task"}
-              clickHandler={() => console.log('add task')}
+              type={"button"}
+              clickHandler={() => openForm({
+                formMode: ModalFormMode.AddTask,
+                formItem: null,
+                listId: selectedList.id
+              })}
             />
           </div>
         </>

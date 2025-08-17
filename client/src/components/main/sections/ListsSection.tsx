@@ -2,13 +2,15 @@ import type {List} from "../../../data/lists.ts";
 import type {FC, JSX} from "react";
 import {Button} from "../../button/Button.tsx";
 import clsx from "clsx/lite";
+import {type ListManagementFormMode, ModalFormMode} from "../../../utils/modalFormMode.ts";
 
 type ListsSectionProps = {
   lists: Array<List>
   selectList: (list: List | null) => void
+  openForm: (formState: ListManagementFormMode) => void
 }
 
-export const ListsSection: FC<ListsSectionProps> = ({lists, selectList}) => {
+export const ListsSection: FC<ListsSectionProps> = ({lists, selectList, openForm}) => {
   const listsSectionClassName: string = clsx(
     'flex flex-col flex-1',
     lists.length && `
@@ -48,7 +50,11 @@ export const ListsSection: FC<ListsSectionProps> = ({lists, selectList}) => {
       <div className="flex justify-end">
         <Button
           text={"Create new list"}
-          clickHandler={() => console.log('create new list')}
+          type={'button'}
+          clickHandler={() => openForm({
+            formMode: ModalFormMode.AddList,
+            formItem: null
+          })}
         />
       </div>
     </section>

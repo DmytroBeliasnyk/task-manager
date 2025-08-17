@@ -1,19 +1,34 @@
-import {type JSX, useState} from 'react'
+import {type FC, useState} from 'react'
 import {Header} from "./Header.tsx";
-import {TasksSection} from "./sections/TasksSection.tsx";
-import {type List, lists} from "../../data/lists.ts";
+import {ListManagementSection} from "./sections/ListManagementSection.tsx";
+import {type List} from "../../data/lists.ts";
 import {ListsSection} from "./sections/ListsSection.tsx";
+import type {ListManagementFormMode} from "../../utils/modalFormMode.ts";
 
-export const Main: () => JSX.Element = (): JSX.Element => {
-  const [selectedList, setSelectedListId] = useState<List | null>(null)
+type MainProps = {
+  lists: Array<List>
+  openForm: (formState: ListManagementFormMode) => void
+}
+
+export const Main: FC<MainProps> = ({lists, openForm}) => {
+  const [selectedList, setSelectedList] = useState<List | null>(null)
 
   return (
-    <div className="flex flex-col size-full p-4">
-      <Header/>
-      <main className="flex gap-4 h-full overflow-hidden">
-        <ListsSection lists={lists} selectList={setSelectedListId}/>
-        <TasksSection selectedList={selectedList}/>
-      </main>
-    </div>
+    <>
+      <div className="flex flex-col size-full p-4">
+        <Header/>
+        <main className="flex gap-4 h-full overflow-hidden">
+          <ListsSection
+            lists={lists}
+            selectList={setSelectedList}
+            openForm={openForm}
+          />
+          <ListManagementSection
+            selectedList={selectedList}
+            openForm={openForm}
+          />
+        </main>
+      </div>
+    </>
   )
 }
