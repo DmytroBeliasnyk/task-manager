@@ -1,6 +1,6 @@
 import {Sidebar} from "./sidebar/Sidebar.tsx";
 import {Main} from "./main/Main.tsx";
-import {type FC, useState} from "react";
+import {type FC, useEffect, useState} from "react";
 import {lists} from "../data/lists.ts";
 import {ListManagementForm} from "./forms/ListManagementForm.tsx";
 import clsx from "clsx/lite";
@@ -15,6 +15,11 @@ export const App: FC = () => {
   const [listManagementFormState, setModalFormState] = useState<ListManagementFormState>({
     isOpen: false
   })
+  useEffect(() => {
+    fetch('/api')
+      .then(res => res.json())
+      .then(data => console.log(data))
+  }, [])
 
   function openForm(formState: ListManagementFormMode): void {
     setModalFormState({isOpen: true, formState})
