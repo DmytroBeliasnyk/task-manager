@@ -1,8 +1,8 @@
-import type {List} from "../../../data/lists.ts";
 import type {FC, JSX} from "react";
 import {Button} from "../../button/Button.tsx";
 import clsx from "clsx/lite";
 import {type ListManagementFormMode, ModalFormMode} from "../../../utils/modalFormMode.ts";
+import type {List} from "../../../../../shared/types/list.ts";
 
 type ListsSectionProps = {
   lists: Array<List>

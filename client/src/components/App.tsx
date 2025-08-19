@@ -1,10 +1,10 @@
 import {Sidebar} from "./sidebar/Sidebar.tsx";
 import {Main} from "./main/Main.tsx";
 import {type FC, useEffect, useState} from "react";
-import {lists} from "../data/lists.ts";
 import {ListManagementForm} from "./forms/ListManagementForm.tsx";
 import clsx from "clsx/lite";
 import type {ListManagementFormMode} from "../utils/modalFormMode.ts";
+import type {List} from "../../../shared/types/list.ts";
 
 type ListManagementFormState = {
   isOpen: boolean
@@ -12,13 +12,14 @@ type ListManagementFormState = {
 }
 
 export const App: FC = () => {
+  const [lists, setLists] = useState<Array<List>>([])
   const [listManagementFormState, setModalFormState] = useState<ListManagementFormState>({
     isOpen: false
   })
   useEffect(() => {
-    fetch('/api')
+    fetch('/api/lists')
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(res => setLists(res.data))
   }, [])
 
   function openForm(formState: ListManagementFormMode): void {
@@ -49,29 +50,3 @@ export const App: FC = () => {
     </div>
   )
 }
-
-/*
-*   function addList(formData: FormData): void {
-    setOpenModalFormOpen({isOpen: false})
-  }
-
-  function updateList(formData: FormData): void {
-    setOpenModalFormOpen({isOpen: false})
-  }
-
-  function addTask(formData: FormData): void {
-    setOpenModalFormOpen({isOpen: false})
-  }
-
-  function updateTask(formData: FormData): void {
-    setOpenModalFormOpen({isOpen: false})
-  }
-
-  function formAction(formData: FormData): void {
-    switch (openModalForm.formMode) {
-      case ModalFormMode.AddTask:
-
-    }
-  }
-*
-* */

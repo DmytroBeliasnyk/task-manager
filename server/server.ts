@@ -1,10 +1,9 @@
-import express, {Request, Response} from "express";
+import express, {Application} from "express";
+import {apiRouter} from "./routes/apiRouter";
 
-const PORT = 8000
-const app = express()
+const PORT: number = 8000
+const app: Application = express()
 
-app.get('/api', (req: Request, res: Response): void => {
-  res.json({message: 'Hello from server'})
-})
+app.use('/api', apiRouter)
 
 app.listen(PORT, () => console.log(`server connected on port ${PORT}`))

@@ -1,9 +1,9 @@
 import {type FC, useState} from 'react'
 import {Header} from "./Header.tsx";
 import {ListManagementSection} from "./sections/ListManagementSection.tsx";
-import {type List} from "../../data/lists.ts";
 import {ListsSection} from "./sections/ListsSection.tsx";
 import type {ListManagementFormMode} from "../../utils/modalFormMode.ts";
+import type {List} from "../../../../shared/types/list.ts";
 
 type MainProps = {
   lists: Array<List>

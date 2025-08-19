@@ -1,9 +1,9 @@
 import type {FC, JSX} from 'react';
 import clsx from 'clsx/lite';
-import type {List} from "../../../data/lists.ts";
 import {Button} from "../../button/Button.tsx";
-import type {Task} from "../../../data/tasks.ts";
 import {type ListManagementFormMode, ModalFormMode} from "../../../utils/modalFormMode.ts";
+import type {List} from "../../../../../shared/types/list.ts";
+import type {Task} from "../../../../../shared/types/task.ts";
 
 type TaskSectionProps = {
   selectedList: List | null
