@@ -1,6 +1,6 @@
 import express, {Router} from "express";
-import {getLists} from "../controllers/listController";
+import {getListsController} from "../controllers/list";
 
 export const apiRouter: Router = express.Router()
 
-apiRouter.get('/lists', getLists)
+apiRouter.get('/lists', getListsController)
