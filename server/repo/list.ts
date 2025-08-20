@@ -1,5 +1,5 @@
-import {db} from "../db";
 import {List} from "../../shared/types/list";
+import {db} from "../db/db";
 
 export async function saveListInDB(id: string, title: string, description: string): Promise<void> {
   const client = await db.connect()

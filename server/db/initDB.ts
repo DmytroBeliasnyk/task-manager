@@ -1,19 +1,11 @@
-import {Pool} from "pg";
-import dotenv from "dotenv";
+import {db} from "./db";
 
-dotenv.config();
-
-export const db = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "task_manager",
-  password: process.env.DB_PASSWORD,
-  port: 5432,
-});
-
-(async () => {
+export async function initDB(): Promise<void> {
+  const client = await db.connect()
   try {
-    await db.query(`
+    await client.query('BEGIN')
+
+    await client.query(`
         CREATE TABLE IF NOT EXISTS lists
         (
             id          TEXT PRIMARY KEY,
@@ -22,7 +14,7 @@ export const db = new Pool({
         );`
     )
 
-    await db.query(`
+    await client.query(`
         CREATE TABLE IF NOT EXISTS tasks
         (
             id          TEXT PRIMARY KEY,
@@ -31,9 +23,12 @@ export const db = new Pool({
             list_id     TEXT REFERENCES lists (id)
         );`
     )
+
+    await client.query('COMMIT')
   } catch (err) {
-    console.log(err)
+    await client.query('ROLLBACK')
+    throw err
   } finally {
-    await db.end();
+    client.release()
   }
-})()
+}
